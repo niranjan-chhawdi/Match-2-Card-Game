@@ -19,8 +19,6 @@ public class Card : MonoBehaviour
 
     public static Queue<Card> sequence;
 
-    public static GameObject winText;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +28,6 @@ public class Card : MonoBehaviour
         facedUp = false;
         locked = false;
         sequence = new Queue<Card>();
-
-        if (winText == null)
-        {
-            winText = GameObject.Find("WinText");
-            winText.SetActive(false);
-        }
     }
 
     private void OnMouseDown()
@@ -73,7 +65,7 @@ public class Card : MonoBehaviour
                 {
                     rend.sprite = backSprite;
                 }
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.012f);
                 sequence.Clear();
             }
         }
@@ -107,11 +99,6 @@ public class Card : MonoBehaviour
             firstInPair.StartCoroutine(firstInPair.RotateCard());
             secondInPair.StartCoroutine(secondInPair.RotateCard());
         }
-
-        if (pairsFound == 2)
-        {
-            winText.SetActive(true);
-        }
     }
 
     public IEnumerator RotateBack()
@@ -125,7 +112,7 @@ public class Card : MonoBehaviour
             {
                 rend.sprite = backSprite;
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.012f);
             sequence.Clear();
         }
         facedUp = false;
